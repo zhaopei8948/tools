@@ -46,7 +46,7 @@ seconds = os.getenv('SCHED_SECONDS') or 3
 # th.setFormatter(formatStr)
 # log.addHandler(sh)
 # log.addHandler(th)
-log = Logger('modify_invt.log')
+log = Logger('logs/appstatus/modify_invt.log')
 
 
 def executeSql(sql, fetch=True, **kw):
