@@ -1,6 +1,7 @@
 import os
 import traceback
 import time
+import cx_Oracle
 from datetime import datetime, timedelta
 
 from apscheduler.schedulers.background import BackgroundScheduler
