@@ -38,7 +38,7 @@ def executeSql(sql, fetch=True, **kw):
 
 def selectInvt():
     sql = '''
-    select t.invt_no, t1.entry_id, t.head_guid, to_char(t1.message_time, 'yyyyMMddhh24miss'), to_char(t.sys_date, 'yyyyMMddhh24miss')
+    select t.invt_no, t1.entry_id, t.head_guid, time_to_num(t1.message_time - t.sys_date)
     from ceb2_invt_head t
     left outer join check_mail_good_head t1 on t1.logistics_no = t.logistics_no
     where t.sys_date > to_date(:startTime, 'yyyy-MM-dd')
@@ -55,7 +55,7 @@ def selectInvt():
 
     for invtInfo in result:
         updateSql = "update ceb2_invt_head t set t.cus_status = '26', t.cus_time = sysdate "
-        if abs(int(invtInfo[3]) - int(invtInfo[4])) >= 24 * 60 * 60:
+        if long(invtInfo[3]) >= 24 * 60 * 60:
             continue
 
         updateSql += " where t.head_guid = '" + invtInfo[2] + "'"
