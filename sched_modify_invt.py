@@ -92,7 +92,8 @@ def selectInvt():
             if invtInfo[1] is None:
                 continue
             else:
-                if abs(int(invtInfo[3]) - int(invtInfo[4])) < 24 * 60 * 60:
+                if abs(datetime.strptime(invtInfo[3], '%Y%m%d%H%M%S').timestamp()
+                       - datetime.strptime(invtInfo[4], '%Y%m%d%H%M%S').timestamp()) < 24.0 * 60.0 * 60.0:
                     updateSql += ", t.invt_no = '" + invtInfo[1] + "' "
 
         updateSql += " where t.head_guid = '" + invtInfo[2] + "'"
