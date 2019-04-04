@@ -55,7 +55,7 @@ def selectInvt():
 
     for invtInfo in result:
         updateSql = "update ceb2_invt_head t set t.cus_status = '26', t.cus_time = sysdate "
-        if long(invtInfo[3]) >= 24 * 60 * 60:
+        if int(invtInfo[3]) >= 48 * 60 * 60:
             continue
 
         updateSql += " where t.head_guid = '" + invtInfo[2] + "'"
